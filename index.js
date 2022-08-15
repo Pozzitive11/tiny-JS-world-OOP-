@@ -7,70 +7,55 @@ class Inhabitant {
   }
 
   getProperties() {
-    return `${this.species}; My name ${this.name}; ${this.gender}; I have ${this.legs} legs and ${this.hands} hands; ${this.saying};` ;
+    return `${this.species}; My name ${this.name}; ${this.gender}; ${this.saying}`;
   }
 }
-class Animals extends Inhabitant {
-  constructor(species, name, gender, paw, saying) {
-    super(species, name, gender, saying);
-    this.paw = paw;
+class Animal extends Inhabitant {
+  constructor(name, gender, saying) {
+    super(name, gender, saying);
+    this.paw = 4;
   }
   getProperties() {
-    return `${this.species}; ${this.name}; ${this.gender}; I have ${this.paw} paws; ${this.saying};`;
+    return super.getProperties() + `; I have ${this.paw} paws;`;
   }
 }
 
-class Humans extends Inhabitant {
-  constructor(species, name, gender, legs, hands, saying){
-    super(species, name, gender, saying);
-    this.legs = legs;
-    this.hands = hands;
+class Human extends Inhabitant {
+  constructor(name, gender, saying) {
+    super("human", name, gender, saying);
+    this.hands = 2;
+    this.legs = 2;
+  }
+
+  getProperties() {
+    return super.getProperties() + `; I have ${this.legs} legs and ${this.hands} hands;`;
   }
 }
 
-class Dog extends Animals {
-  constructor(species, name, gender, saying, paw) {
-    super(species, name, gender, paw, saying);
+class Dog extends Animal {
+  constructor(name, gender) {
+    super('dog',name, gender, 'Woof-woof!');
   }
 }
 
-class Cat extends Animals {
-  constructor(species, name, gender, paw) {
-    super(species, name, gender, paw, "mew");
+class Cat extends Animal {
+  constructor(name, gender) {
+    super('cat',name, gender, "meow-meow");
   }
 }
 class Catwoman extends Cat {
-  constructor(species, name, gender, paws, saying) {
-    super(species, name, gender, paws, saying);
-  } 
-}
-
-class Man extends Humans {
-  constructor(species, name, gender, legs, hands, saying) {
-    super(species, name, gender, legs, hands, saying);
+  constructor(name) {
+    super(name);
+    this.species = "catwoman";
+    this.gender = "female";
   }
 }
 
-class Woman extends Humans {
-  constructor(species, name, gender, legs, hands, saying) {
-    super(species, name, gender, legs, hands, saying);
-  }
-}
-
-
-const dog = new Dog("dog", "Dick", "male", "woof-woof!", 4);
-const cat = new Cat("cat", "Kitty", "female", 5);
-const catwoman = new Catwoman("catwoman", "Nazar", "female", 2);
-console.log(catwoman);
-const woman = new Woman(
-  "woman",
-  "Dazdraperma",
-  "female",
-  2,
-  2,
-  "It used to be better"
-);
-const man = new Man("man", "Mike", "male", 2, 2, "Hello World!");
+const dog = new Dog("Buddy", 'male');
+const cat = new Cat("Kitty", 'female');
+const catwoman = new Catwoman("Nazar");
+const woman = new Human("Dazdraperma", 'female', "It used to be better");
+const man = new Human("Mike", 'male' , "Hello World!");
 
 const inhabitants = [dog, cat, catwoman, woman, man];
 
